@@ -3,7 +3,7 @@ import java.util.*;
  
 public class CPU_Scheduling {
 	static Scanner input=new Scanner(System.in);
-	static public final int  N = 100;
+	static public int  N = 100;
 	static int queue[] = new int[N];
 	static int front = 0, rear = 0;
 	static int n = 999;
@@ -21,15 +21,6 @@ public class CPU_Scheduling {
 	static int quantum;
 	static int overhead;
 	static int remaining_time[] = new int[n];
-
-    static int[] q;
-    static int head = -1, tail = -1;
-    static int time = 0;
-    static boolean[] arrived = new boolean[n]; 
-    static int notArrived = 0;
-    static int[] startTime = new int[n];
-    static int[] tempBurstTime = new int[n];
-    static boolean[] done = new boolean[n];
 	// static int ct[][] = new int [2][n];
 	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	public static void ShortestRemainingTimeFirst()
@@ -776,7 +767,7 @@ public class CPU_Scheduling {
 			    	break;
 			    case "C":
 			    case "c":
-			    	rro();
+			    	RoundRobinWithOverhead();
 			    	break;
 			    case "D":
 			    case "d":
@@ -799,22 +790,15 @@ public class CPU_Scheduling {
 					 completionTime = new int[n]; // completion time
 					 turnAroundTime = new int[n];//turn around time
 					 waitingTime = new int[n];  //waiting time
-					 priority = new int[n];
-					startTime = new int[n];
-					remaining_time = new int[n];
-				       done = new boolean[n];
-				       arrived = new boolean[n];
-				       tempBurstTime = new int[n];
-				       q = new int[n];
-				       queue = new int[N];
+					 flag = new int[n];  //waiting time
 					 averageWaitingTime=0;
 					averageTurnAroundTime=0;
 					quantum = 0;
 					overhead = 0;
-					notArrived = 0;
-					time = 0;
-					head = -1;
-					tail = -1;
+					priority = new int[n];
+					remaining_time = new int[n];
+					 N = 100;
+					queue = new int[N];
 					front = 0; 
 					rear = 0;
 					continue;

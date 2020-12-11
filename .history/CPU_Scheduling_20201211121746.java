@@ -3,7 +3,7 @@ import java.util.*;
  
 public class CPU_Scheduling {
 	static Scanner input=new Scanner(System.in);
-	static public final int  N = 100;
+	static public int  N = 100;
 	static int queue[] = new int[N];
 	static int front = 0, rear = 0;
 	static int n = 999;
@@ -21,15 +21,6 @@ public class CPU_Scheduling {
 	static int quantum;
 	static int overhead;
 	static int remaining_time[] = new int[n];
-
-    static int[] q;
-    static int head = -1, tail = -1;
-    static int time = 0;
-    static boolean[] arrived = new boolean[n]; 
-    static int notArrived = 0;
-    static int[] startTime = new int[n];
-    static int[] tempBurstTime = new int[n];
-    static boolean[] done = new boolean[n];
 	// static int ct[][] = new int [2][n];
 	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	public static void ShortestRemainingTimeFirst()
@@ -639,106 +630,6 @@ public class CPU_Scheduling {
 	        		tat); 
 		
 	}
-	static void rro(){
-	          
-	    
-		System.out.print("Input quantum time: ");  
-		int quantum = input.nextInt();
-		System.out.print("Input overhead: ");  
-		int overhead = input.nextInt(); 
-		
-		//copy values of bt
-		for (int i = 0; i < n; i++)  
-			tempBurstTime[i] = burstTime[i];
-		//q try
-		q = new int[n]; 
-		for (int donePs = 0; donePs < n;) {    
-			if (notArrived!=9)
-				checkArrived();
-			if (head!=-1) {  
-				int i = deq();   
-				
-				if (startTime[i]==0) { 
-					startTime[i] = time;
-				}
-				for (int qtc = 0; qtc < quantum; qtc++) { 
-					++time;
-					--tempBurstTime[i]; 
-					if (notArrived!=9)
-						checkArrived(); 
-					if (done[i] = tempBurstTime[i] == 0) {  
-						donePs++; 
-						completionTime[i] = time;   
-						break;
-					}   
-				}  
-				if (!done[i])
-					enq(i);   
-				
-				for (int otc = 0; otc < overhead && n!=donePs; otc++) {
-					++time; 
-					if (notArrived!=9)
-						checkArrived();
-				}  
-			} 
-			else {
-				
-			
-				time++;  
-			} 
-		}
-
-		float averageWaitingTime = 0, averageTurnAroundTime = 0;
-		for (int i = 0; i < n; i++) 
-		{
-			turnAroundTime[i] = completionTime[i] - arrivalTime[i];
-			waitingTime[i] = turnAroundTime[i] - burstTime[i];
-			averageWaitingTime += waitingTime[i];
-			averageTurnAroundTime += turnAroundTime[i];
-		}  
-
-		
-
-		  System.out.println("Processes | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
-
-			for (int i = 0; i < n; i++) {
-			   
-
-				System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + burstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
-			}
-			averageWaitingTime /= n;
-		System.out.println("Average waiting time: " + averageWaitingTime);  
-		averageTurnAroundTime /= n;
-		System.out.println("Average turn around time: " + averageTurnAroundTime); 
-
-	   
-	}
-	private static void checkArrived() {
-		for (int i = 0; i < n; i++) {  
-			if (!arrived[i]) { 
-				// System.out.println("kung di pa nakapasok sa q, check"); 
-				if (arrived[i] = arrivalTime[i] <= time)  {
-					enq(i); 
-					notArrived--; 
-				} 
-			} 
-		}   
-	}
-	private static int deq() {
-		int x = q[head];
-
-		if (head == tail) 
-			head = tail = -1; 
-		else 
-			head = (head+1) % n;
-		return x;
-	}
-	private static void enq(int x) {
-		if (head == -1) 
-			head = 0;
-		tail = (tail+1) % n;
-		q[tail] = x; 
-	}
 	
 	public static void main (String args[]){
 		while(true){
@@ -776,7 +667,7 @@ public class CPU_Scheduling {
 			    	break;
 			    case "C":
 			    case "c":
-			    	rro();
+			    	RoundRobinWithOverhead();
 			    	break;
 			    case "D":
 			    case "d":
@@ -799,22 +690,15 @@ public class CPU_Scheduling {
 					 completionTime = new int[n]; // completion time
 					 turnAroundTime = new int[n];//turn around time
 					 waitingTime = new int[n];  //waiting time
-					 priority = new int[n];
-					startTime = new int[n];
-					remaining_time = new int[n];
-				       done = new boolean[n];
-				       arrived = new boolean[n];
-				       tempBurstTime = new int[n];
-				       q = new int[n];
-				       queue = new int[N];
+					 flag = new int[n];  //waiting time
 					 averageWaitingTime=0;
 					averageTurnAroundTime=0;
 					quantum = 0;
 					overhead = 0;
-					notArrived = 0;
-					time = 0;
-					head = -1;
-					tail = -1;
+					priority = new int[n];
+					remaining_time = new int[n];
+					 N = 100;
+					queue = new int[N];
 					front = 0; 
 					rear = 0;
 					continue;

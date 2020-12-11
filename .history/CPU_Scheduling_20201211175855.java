@@ -776,7 +776,7 @@ public class CPU_Scheduling {
 			    	break;
 			    case "C":
 			    case "c":
-			    	rro();
+			    	RoundRobinWithOverhead();
 			    	break;
 			    case "D":
 			    case "d":
@@ -799,22 +799,14 @@ public class CPU_Scheduling {
 					 completionTime = new int[n]; // completion time
 					 turnAroundTime = new int[n];//turn around time
 					 waitingTime = new int[n];  //waiting time
-					 priority = new int[n];
-					startTime = new int[n];
-					remaining_time = new int[n];
-				       done = new boolean[n];
-				       arrived = new boolean[n];
-				       tempBurstTime = new int[n];
-				       q = new int[n];
-				       queue = new int[N];
+					 flag = new int[n];  //waiting time
 					 averageWaitingTime=0;
 					averageTurnAroundTime=0;
 					quantum = 0;
 					overhead = 0;
-					notArrived = 0;
-					time = 0;
-					head = -1;
-					tail = -1;
+					priority = new int[n];
+					remaining_time = new int[n];
+					queue = new int[N];
 					front = 0; 
 					rear = 0;
 					continue;

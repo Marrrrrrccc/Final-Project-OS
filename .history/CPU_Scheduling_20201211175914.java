@@ -776,7 +776,7 @@ public class CPU_Scheduling {
 			    	break;
 			    case "C":
 			    case "c":
-			    	rro();
+			    	RoundRobinWithOverhead();
 			    	break;
 			    case "D":
 			    case "d":
