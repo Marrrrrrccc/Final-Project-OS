@@ -332,7 +332,7 @@ public class CPU_Scheduling {
 	    for(i=0;i<n;i++)
 	    {
 	    	turnAroundTime[i] = completionTime[i] - arrivalTime[i];
-	    	waitingTime[i] = turnAroundTime[i] - tempBurstTime[i];
+	    	waitingTime[i] = turnAroundTime[i] - temp[i];
 	    	averageWaitingTime+= waitingTime[i];
 	    	averageTurnAroundTime+= turnAroundTime[i];
 	    }
@@ -370,7 +370,7 @@ public class CPU_Scheduling {
 		    for(int a = 0;a<n;a++){
 		    	System.out.print(" BT" +(a+1)+": ");
 		    	burstTime[a]= input.nextInt();
-		    	tempBurstTime[a]= burstTime[a];
+		    	temp[a]= burstTime[a];
 		    	flag[a]= 0;
 		    }
 		    System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit:");
@@ -415,6 +415,7 @@ public class CPU_Scheduling {
 					 priority = new int[n];
 					startTime = new int[n];
 					remaining_time = new int[n];
+					tempBurstTime = new int[n];
 				       done = new boolean[n];
 				       arrived = new boolean[n];
 				       tempBurstTime = new int[n];

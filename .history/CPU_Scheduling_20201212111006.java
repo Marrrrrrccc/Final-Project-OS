@@ -12,7 +12,7 @@ public class CPU_Scheduling {
 	static int arrivalTime[] = new int[n]; //  arrival time
 	static int burstTime[] = new int[n]; //  burst time
 	static int flag[] = new int[n];  //  it checks process is completed or not
-    static int[] tempBurstTime = new int[n];// temporary burst time variable
+	static int temp[]= new int[n];   // temporary burst time variable
 	static int completionTime[] = new int[n]; // completion time
 	static int turnAroundTime[] = new int[n];//turn around time
 	static int waitingTime[] = new int[n];  //waiting time
@@ -27,7 +27,7 @@ public class CPU_Scheduling {
     static boolean[] arrived = new boolean[n]; 
     static int notArrived = 0;
     static int[] startTime = new int[n];
-
+    static int[] tempBurstTime = new int[n];
     static boolean[] done = new boolean[n];
 	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	public static void ShortestRemainingTimeFirst()
@@ -67,7 +67,7 @@ public class CPU_Scheduling {
 	    for(i=0;i<n;i++)
 	    {
 	    	turnAroundTime[i] = completionTime[i] - arrivalTime[i];
-	    	waitingTime[i] = turnAroundTime[i] - tempBurstTime[i];
+	    	waitingTime[i] = turnAroundTime[i] - temp[i];
 	    	averageWaitingTime+= waitingTime[i];
 	    	averageTurnAroundTime+= turnAroundTime[i];
 	    }
@@ -332,7 +332,7 @@ public class CPU_Scheduling {
 	    for(i=0;i<n;i++)
 	    {
 	    	turnAroundTime[i] = completionTime[i] - arrivalTime[i];
-	    	waitingTime[i] = turnAroundTime[i] - tempBurstTime[i];
+	    	waitingTime[i] = turnAroundTime[i] - temp[i];
 	    	averageWaitingTime+= waitingTime[i];
 	    	averageTurnAroundTime+= turnAroundTime[i];
 	    }
@@ -370,7 +370,7 @@ public class CPU_Scheduling {
 		    for(int a = 0;a<n;a++){
 		    	System.out.print(" BT" +(a+1)+": ");
 		    	burstTime[a]= input.nextInt();
-		    	tempBurstTime[a]= burstTime[a];
+		    	temp[a]= burstTime[a];
 		    	flag[a]= 0;
 		    }
 		    System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit:");
@@ -408,13 +408,14 @@ public class CPU_Scheduling {
 					 arrivalTime = new int[n]; //  arrival time
 					 burstTime = new int[n]; //  burst time
 					 flag = new int[n];  //  it checks process is completed or not
-					 tempBurstTime= new int[n];   // temporary burst time variable
+					 temp= new int[n];   // temporary burst time variable
 					 completionTime = new int[n]; // completion time
 					 turnAroundTime = new int[n];//turn around time
 					 waitingTime = new int[n];  //waiting time
 					 priority = new int[n];
 					startTime = new int[n];
 					remaining_time = new int[n];
+					tempBurstTime = new int[n];
 				       done = new boolean[n];
 				       arrived = new boolean[n];
 				       tempBurstTime = new int[n];

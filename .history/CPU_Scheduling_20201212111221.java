@@ -332,7 +332,7 @@ public class CPU_Scheduling {
 	    for(i=0;i<n;i++)
 	    {
 	    	turnAroundTime[i] = completionTime[i] - arrivalTime[i];
-	    	waitingTime[i] = turnAroundTime[i] - tempBurstTime[i];
+	    	waitingTime[i] = turnAroundTime[i] - temp[i];
 	    	averageWaitingTime+= waitingTime[i];
 	    	averageTurnAroundTime+= turnAroundTime[i];
 	    }
