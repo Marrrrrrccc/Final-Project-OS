@@ -238,6 +238,8 @@ public class CPU_Scheduling {
 				}  
 			} 
 			else {
+				
+			
 				time++;  
 			} 
 		}
@@ -333,20 +335,20 @@ public class CPU_Scheduling {
 	    	averageWaitingTime+= waitingTime[i];
 	    	averageTurnAroundTime+= turnAroundTime[i];
 	    }
-	    
+	    System.out.println("\nWaiting Time");
 	   
 	    
-	    System.out.println("Processes | " + "Arrival Time | " + "Burst Time  " + "  |   Priority | " + "Turn Around Time | " + "Waiting Time");
+	    System.out.println("Processes | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
 
         for (i = 0; i < n; i++) {
            
 
-            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + tempBurstTime[i] +"\t\t" + priority[i] +  "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
+            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + burstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
         }
 	    
-	    System.out.println("Average Waiting Time: "+ (float)(averageWaitingTime/n));
-	    System.out.println("Average Turnaround time: "+ (float)(averageTurnAroundTime/n));
 	    
+	    System.out.println("Average Turnaround time: "+ (float)(averageTurnAroundTime/n));
+	    System.out.println("Average Waiting Time: "+ (float)(averageWaitingTime/n));
 	        
 	
 	}

@@ -336,7 +336,7 @@ public class CPU_Scheduling {
 	    
 	   
 	    
-	    System.out.println("Processes | " + "Arrival Time | " + "Burst Time  " + "  |   Priority | " + "Turn Around Time | " + "Waiting Time");
+	    System.out.println("Processes | " + "Arrival Time | " + "Burst Time | " + "     Priority | " + "Turn Around Time | " + "Waiting Time");
 
         for (i = 0; i < n; i++) {
            
