@@ -347,7 +347,7 @@ public class CPU_Scheduling {
         }
 	    
 	    System.out.println("Average Waiting Time: "+ (averageWaitingTime/n));
-	    System.out.println("Average Turnaround time: "+ (averageTurnAroundTime/n));
+	    System.out.println("Average Turnaround time: "+ (float)(averageTurnAroundTime/n));
 	    
 	        
 	
