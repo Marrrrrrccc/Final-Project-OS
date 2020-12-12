@@ -21,6 +21,7 @@ public class CPU_Scheduling {
 	static int quantum;
 	static int overhead;
 	static int remaining_time[] = new int[n];
+
     static int[] q;
     static int head = -1, tail = -1;
     static int time = 0;
@@ -29,6 +30,7 @@ public class CPU_Scheduling {
     static int[] startTime = new int[n];
     static int[] tempBurstTime = new int[n];
     static boolean[] done = new boolean[n];
+	// static int ct[][] = new int [2][n];
 	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	public static void ShortestRemainingTimeFirst()
 	{

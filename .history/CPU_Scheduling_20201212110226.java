@@ -21,6 +21,7 @@ public class CPU_Scheduling {
 	static int quantum;
 	static int overhead;
 	static int remaining_time[] = new int[n];
+
     static int[] q;
     static int head = -1, tail = -1;
     static int time = 0;
@@ -29,6 +30,7 @@ public class CPU_Scheduling {
     static int[] startTime = new int[n];
     static int[] tempBurstTime = new int[n];
     static boolean[] done = new boolean[n];
+	// static int ct[][] = new int [2][n];
 	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	public static void ShortestRemainingTimeFirst()
 	{
@@ -85,6 +87,147 @@ public class CPU_Scheduling {
 	    System.out.println("Average Turnaround time: "+ (float)(averageTurnAroundTime/n));
 	  
 	}
+
+
+
+
+	
+
+	
+	public static void pPrio(){
+		int x[] = new int[n];
+		int i;
+		int smallest;
+		int count = 0;
+		int time;
+		int end;
+		System.out.print("Input corresponding process priorities\n");
+		for(i = 0; i<n;i++){
+			System.out.print(" Enter Priority "+ (i+1) + ": ");
+			priority[i]  = input.nextInt();
+		}
+		for(i=0; i<n; i++)
+	        x[i]=burstTime[i];
+
+	    priority[9]=-1;
+	    for(time=0; count!=n; time++)
+	    {
+	        smallest=9;
+	        for(i=0; i<n; i++)
+	        {
+	            if(arrivalTime[i]<=time && priority[i]>priority[smallest] && burstTime[i]>0 )
+	                smallest=i;
+	        }
+	        burstTime[smallest]--;
+	        if(burstTime[smallest]==0)
+	        {
+	            count++;
+	            end=time+1;
+	            completionTime[smallest] = end;
+	            waitingTime[smallest] = end - arrivalTime[smallest] - x[smallest];
+	            turnAroundTime[smallest] = end - arrivalTime[smallest];
+	        }
+	    }
+	    for(i=0;i<n;i++)
+	    {
+	    	turnAroundTime[i] = completionTime[i] - arrivalTime[i];
+	    	waitingTime[i] = turnAroundTime[i] - temp[i];
+	    	averageWaitingTime+= waitingTime[i];
+	    	averageTurnAroundTime+= turnAroundTime[i];
+	    }
+	    System.out.println("\nWaiting Time");
+	   
+	    
+	    System.out.println("Processes | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
+
+        for (i = 0; i < n; i++) {
+           
+
+            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + burstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
+        }
+	    
+	    
+	    System.out.println("Average Turnaround time: "+ (float)(averageTurnAroundTime/n));
+	    System.out.println("Average Waiting Time: "+ (float)(averageWaitingTime/n));
+	        
+	
+	}
+//	public static void RoundRobinNew(){
+//		System.out.print("Enter Quantum Time:");
+//		 quantum = input.nextInt();
+//		 int flag;
+//		
+//		
+//	       int rem_time[] = new int[n];
+//	       int wt_time[] = new int[n];
+//	        for(int i=0;i<wt_time.length;i++){
+//	            rem_time[i]= burstTime[i];
+//	        }
+//	        int it=0,j=0,t =0;
+//		
+//			t=arrivalTime[0];
+//			do{
+//				j=0;
+//				flag=0;
+//				for(int i=0;i<n;i++){
+//					if((arrivalTime[i]<=t)&&(rem_time[i]>0)){
+//						flag=1;
+//						t=(t+quantum);
+//						if(rem_time[i]<quantum)
+//							t=t-(quantum-rem_time[i]);
+//						
+//						rem_time[i]=(rem_time[i]-quantum);
+//						completionTime[i]=t;
+//					}
+//				}
+//				if(flag==0){
+//					it=it+1;
+//					t=(t+1);
+//				}
+//				for(int i=0;i<n;i++)
+//					if(rem_time[i]>0)
+//						j=1;
+//			}while(j==1);
+//	         
+//	        for(int al=0;al<n;al++){
+//	            turnAroundTime[al]= completionTime[al]-arrivalTime[al];
+//	            waitingTime[al] = turnAroundTime[al]-burstTime[al];
+//	             
+//	             
+//	        }
+//	        
+//	        int total_wt = 0;
+//	        int total_tat = 0;
+//	        for (int c=0; c<n; c++) 
+//	        { 
+//	            total_wt = total_wt + waitingTime[c]; 
+//	            total_tat = total_tat + turnAroundTime[c]; 
+//	            
+//	        } 
+//	        System.out.println("Waiting Time");
+//		    for(int q=0;q<n;q++)
+//		    {
+//		    	System.out.print("P" + processId[q] +": " +  waitingTime[q] +"\n");
+//		    }
+//		    System.out.println("Average waiting time = " + 
+//                    (float)total_wt / (float)n); 
+//		    System.out.println();
+//		    System.out.println("Turnaround Time");
+//		    for(int count=0;count<n;count++)
+//		    {
+//		    	System.out.print("P" + processId[count] +": " + turnAroundTime[count] +"\n");
+//		    }
+//		    
+//		    
+//	        
+//	       
+//	        System.out.println("Average turn around time = " + 
+//	                           (float)total_tat / (float)n); 
+//	        for(int a=0;a<n;a++){
+//				   System.out.println(completionTime[a]);
+//			   }
+//	       
+//	}
 	static void push(int process_id)
 	{
 		queue[rear] = process_id;
@@ -295,64 +438,7 @@ public class CPU_Scheduling {
 		tail = (tail+1) % n;
 		q[tail] = x; 
 	}
-	public static void pPrio(){
-		int x[] = new int[n];
-		int i;
-		int smallest;
-		int count = 0;
-		int time;
-		int end;
-		System.out.print("Input corresponding process priorities\n");
-		for(i = 0; i<n;i++){
-			System.out.print(" Enter Priority "+ (i+1) + ": ");
-			priority[i]  = input.nextInt();
-		}
-		for(i=0; i<n; i++)
-	        x[i]=burstTime[i];
-
-	    priority[9]=-1;
-	    for(time=0; count!=n; time++)
-	    {
-	        smallest=9;
-	        for(i=0; i<n; i++)
-	        {
-	            if(arrivalTime[i]<=time && priority[i]>priority[smallest] && burstTime[i]>0 )
-	                smallest=i;
-	        }
-	        burstTime[smallest]--;
-	        if(burstTime[smallest]==0)
-	        {
-	            count++;
-	            end=time+1;
-	            completionTime[smallest] = end;
-	            waitingTime[smallest] = end - arrivalTime[smallest] - x[smallest];
-	            turnAroundTime[smallest] = end - arrivalTime[smallest];
-	        }
-	    }
-	    for(i=0;i<n;i++)
-	    {
-	    	turnAroundTime[i] = completionTime[i] - arrivalTime[i];
-	    	waitingTime[i] = turnAroundTime[i] - temp[i];
-	    	averageWaitingTime+= waitingTime[i];
-	    	averageTurnAroundTime+= turnAroundTime[i];
-	    }
-	    System.out.println("\nWaiting Time");
-	   
-	    
-	    System.out.println("Processes | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
-
-        for (i = 0; i < n; i++) {
-           
-
-            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + burstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
-        }
-	    
-	    
-	    System.out.println("Average Turnaround time: "+ (float)(averageTurnAroundTime/n));
-	    System.out.println("Average Waiting Time: "+ (float)(averageWaitingTime/n));
-	        
 	
-	}
 	public static void main (String args[]){
 		while(true){
 			System.out.print("\n" + breaker + "\n Input number of processes[2-9]: ");
