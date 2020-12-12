@@ -29,7 +29,9 @@ public class CPU_Scheduling {
     static int[] startTime = new int[n];
 
     static boolean[] done = new boolean[n];
-	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
+	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *";
+	static String breaker2 = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
+	
 	public static void ShortestRemainingTimeFirst()
 	{
 		int i;
@@ -72,14 +74,14 @@ public class CPU_Scheduling {
 	    	averageTurnAroundTime+= turnAroundTime[i];
 	    }
 	    
-	    System.out.println("Processes | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
+	    System.out.println(breaker + "\nProcesses | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
 
         for (i = 0; i < n; i++) {
            
 
             System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + burstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
         }
-	    System.out.println("Average Waiting Time: "+ (float)(averageWaitingTime/n));
+	    System.out.println("\nAverage Waiting Time: "+ (float)(averageWaitingTime/n));
 	  
 	    
 	    System.out.println("Average Turnaround time: "+ (float)(averageTurnAroundTime/n));
@@ -370,33 +372,47 @@ public class CPU_Scheduling {
 		    	tempBurstTime[a]= burstTime[a];
 		    	flag[a]= 0;
 		    }
-		    System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit:");
-		    System.out.print("\nEnter choice: ");
-		    String choice = input.next();
-		    System.out.println("\n" + breaker + "\n");
-		
+
+		    int caseFail = 0;
+		    
+		    do {
+		    	
+			    System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit:");
+			    System.out.print("\nEnter choice: ");
+			    String choice = input.next();
+			    System.out.print("\n");
+			
 		    	switch(choice){
 			    case "A":
 			    case "a":
+			    	caseFail = 1;
 			    	ShortestRemainingTimeFirst();
 			    	break;
 			    case "B":
 			    case "b":
+			    	caseFail = 1;
 			    	RR();
 			    	break;
 			    case "C":
 			    case "c":
+			    	caseFail = 1;
 			    	rro();
 			    	break;
 			    case "D":
 			    case "d":
+			    	caseFail = 1;
 			    	pPrio();//Highest Number Highest Priority
 			    	break;
 			    case "F":
 			    case "f":
+			    	caseFail = 1;
 			    	System.exit(0);
 			    	break;
+			    default:
+			    	System.out.println("Please enter only letters from A to F");
 			    }
+		    } while (caseFail != 1); 
+		    	
 		    	System.out.print("\nInput another set?[y/n]:");
 				 choice = input.next();
 				if(choice.equalsIgnoreCase("y")){
@@ -430,7 +446,7 @@ public class CPU_Scheduling {
 					continue;
 
 				}else{
-					System.out.println("\n\n"+ breaker +"\n*\t   Thank you for using our program.\t    *\n*\t   Made by:\t\t\t\t    *\n*\t      Marc Ricafort\t\t\t    *\n*\t      Mhargarette Basbas\t\t    *\n*\t      Stanley Orong\t\t\t    *\n*\t      Patricia Valenzuela\t\t    *\n*\t      Cyril Verdad\t\t\t    *\n" + breaker );
+					System.out.println("\n\n"+ breaker2 +"\n*\t   Thank you for using our program.\t    *\n*\t   Made by:\t\t\t\t    *\n*\t      Marc Ricafort\t\t\t    *\n*\t      Mhargarette Basbas\t\t    *\n*\t      Stanley Orong\t\t\t    *\n*\t      Patricia Valenzuela\t\t    *\n*\t      Cyril Verdad\t\t\t    *\n" + breaker2 );
 					break;
 				}
 			
