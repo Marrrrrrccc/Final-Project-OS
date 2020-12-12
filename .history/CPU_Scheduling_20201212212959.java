@@ -32,33 +32,7 @@ public class CPU_Scheduling {
 	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	static String breaker2 = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	public static void zeroVariables(){
-		n=99;
-		processId = new int[n];
-		 arrivalTime = new int[n]; //  arrival time
-		 burstTime = new int[n]; //  burst time
-		 flag = new int[n];  //  it checks process is completed or not
-		 tempBurstTime= new int[n];   // temporary burst time variable
-		 completionTime = new int[n]; // completion time
-		 turnAroundTime = new int[n];//turn around time
-		 waitingTime = new int[n];  //waiting time
-		 priority = new int[n];
-		startTime = new int[n];
-		remaining_time = new int[n];
-		   done = new boolean[n];
-		   arrived = new boolean[n];
-		   tempBurstTime = new int[n];
-		   q = new int[n];
-		   queue = new int[N];
-		 averageWaitingTime=0;
-		averageTurnAroundTime=0;
-		quantum = 0;
-		overhead = 0;
-		notArrived = 0;
-		time = 0;
-		head = -1;
-		tail = -1;
-		front = 0; 
-		rear = 0;
+
 	}
 	
 	public static void ShortestRemainingTimeFirst()
@@ -108,7 +82,7 @@ public class CPU_Scheduling {
         for (i = 0; i < n; i++) {
            
 
-            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + tempBurstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
+            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + burstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
         }
 	    System.out.println("\nAverage Waiting Time: "+ (averageWaitingTime/n));
 	  
@@ -445,7 +419,7 @@ public class CPU_Scheduling {
 		    	System.out.print("\nInput another set?[y/n]:");
 				 choice = input.next();
 				if(choice.equalsIgnoreCase("y")){
-					zeroVariables();
+					
 					continue;
 
 				}else{

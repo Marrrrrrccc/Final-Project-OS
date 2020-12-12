@@ -108,7 +108,7 @@ public class CPU_Scheduling {
         for (i = 0; i < n; i++) {
            
 
-            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + tempBurstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
+            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + burstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
         }
 	    System.out.println("\nAverage Waiting Time: "+ (averageWaitingTime/n));
 	  
@@ -445,7 +445,7 @@ public class CPU_Scheduling {
 		    	System.out.print("\nInput another set?[y/n]:");
 				 choice = input.next();
 				if(choice.equalsIgnoreCase("y")){
-					zeroVariables();
+					
 					continue;
 
 				}else{

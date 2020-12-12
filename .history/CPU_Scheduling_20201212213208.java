@@ -108,7 +108,7 @@ public class CPU_Scheduling {
         for (i = 0; i < n; i++) {
            
 
-            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + tempBurstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
+            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + te[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
         }
 	    System.out.println("\nAverage Waiting Time: "+ (averageWaitingTime/n));
 	  
