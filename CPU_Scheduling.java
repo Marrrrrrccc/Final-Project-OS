@@ -1,4 +1,5 @@
 
+import java.io.IOException;
 import java.util.*;
  
 public class CPU_Scheduling {
@@ -61,6 +62,10 @@ public class CPU_Scheduling {
 		rear = 0;
 	}
 	
+	static void thankYou() {
+		System.out.println("\n\n"+ breaker2 +"\n*\t   Thank you for using our program.\t    *\n*\t   Made by:\t\t\t\t    *\n*\t      Marc Ricafort\t\t\t    *\n*\t      Mhargarette Basbas\t\t    *\n*\t      Stanley Orong\t\t\t    *\n*\t      Patricia Valenzuela\t\t    *\n*\t      Cyril Verdad\t\t\t    *\n" + breaker2 );
+	}
+	
 	public static void ShortestRemainingTimeFirst()
 	{
 		int i;
@@ -121,6 +126,7 @@ public class CPU_Scheduling {
 		queue[rear] = process_id;
 		rear = (rear+1)%N;
 	}
+	
 	static int pop()
 	{
 		if(front == rear)
@@ -130,6 +136,7 @@ public class CPU_Scheduling {
 		front = (front +1)%N;
 		return return_position;
 	}
+	
 	static void RR(){
 		float wait_time_total = 0.0f, tat = 0.0f;
 		
@@ -138,8 +145,20 @@ public class CPU_Scheduling {
 			processId[i] = i+1;
 			remaining_time[i] = burstTime[i];
 		}
-		System.out.println("Enter time quantum: ");
-		quantum = input.nextInt();
+		
+		int caseFail1 = 0;
+		
+		//do while to catch exception from invalid input
+		do {
+			try {
+				System.out.print("Enter time quantum: ");
+				quantum = input.nextInt();
+				caseFail1 = 1;
+			} catch (Exception e) {
+				System.out.println("Invalid Input. Please enter an Integer only.\n");
+				input.next();
+			}
+		} while (caseFail1 != 1);
 
 		int time=0; 
 		int processes_left=n;   
@@ -207,20 +226,15 @@ public class CPU_Scheduling {
 		System.out.print("\n");
 
 		
-	      System.out.println("Processes | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
+	      System.out.println(breaker + "\nProcesses | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
 
 	        for (int i = 0; i < n; i++) {
-	           
-
 	            System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + burstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
 	        }
 		    
-	        
-
-		    System.out.println("Average waiting time = " + 
+		    System.out.println("\nAverage waiting time = " + 
 		    		wait_time_total );
 
-		    
 	          
 	        System.out.println("Average turn around time = " + 
 	        		tat); 
@@ -228,13 +242,34 @@ public class CPU_Scheduling {
 	}
 	static void rro(){
 	          
+		int caseFail1 = 0;
+			
+		//do while to catch exception from invalid input
+		do {
+		    try {
+				System.out.print("Input quantum time: ");  
+				quantum = input.nextInt();
+				caseFail1 = 1;
+			} catch (Exception e) {
+				System.out.println("Invalid Input. Please enter an Integer only.\n");
+				input.next();
+			}
+		} while (caseFail1 != 1);
 	    
-		System.out.print("Input quantum time: ");  
-		int quantum = input.nextInt();
-		System.out.print("Input overhead: ");  
-		int overhead = input.nextInt(); 
+		int caseFail2 = 0;
+		//do while to catch exception from invalid input
+		do {
+			try {
+			System.out.print("Input overhead: ");  
+			overhead = input.nextInt(); 
+			caseFail2 = 1;
+			} catch (Exception e) {
+				System.out.println("Invalid Input. Please enter an Integer only.\n");
+				input.next();
+			}	
+		} while (caseFail2 != 1);
 		
-		//copy values of bt
+		//copy values of burst time
 		for (int i = 0; i < n; i++)  
 			tempBurstTime[i] = burstTime[i];
 		//q try
@@ -284,15 +319,13 @@ public class CPU_Scheduling {
 
 		
 
-		  System.out.println("Processes | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
+		  System.out.println("\n" + breaker + "\nProcesses | " + "Arrival Time | " + "Burst Time | "  + "Turn Around Time | " + "Waiting Time");
 
 			for (int i = 0; i < n; i++) {
-			   
-
 				System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + burstTime[i] + "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
 			}
 			averageWaitingTime /= n;
-		System.out.println("Average waiting time: " + averageWaitingTime);  
+		System.out.println("\nAverage waiting time: " + averageWaitingTime);  
 		averageTurnAroundTime /= n;
 		System.out.println("Average turn around time: " + averageTurnAroundTime); 
 
@@ -330,11 +363,23 @@ public class CPU_Scheduling {
 		int count = 0;
 		int time;
 		int end;
-		System.out.print("Input corresponding process priorities\n");
-		for(i = 0; i<n;i++){
-			System.out.print(" Enter Priority "+ (i+1) + ": ");
-			priority[i]  = input.nextInt();
-		}
+		int caseFail1 = 0;
+		
+		do {
+			try {
+				System.out.print("Input corresponding process priorities\n");
+				for(i = 0; i<n;i++){
+					System.out.print(" Enter Priority "+ (i+1) + ": ");
+					priority[i]  = input.nextInt();
+					if (i+1 >= n) {
+						caseFail1 = 1;
+					}
+				}
+			} catch (Exception e) {
+				System.out.println(" Invalid Input. Please enter integers only.\n");
+				input.next();
+			}
+		} while (caseFail1 != 1);
 		for(i=0; i<n; i++)
 	        x[i]=burstTime[i];
 
@@ -367,7 +412,7 @@ public class CPU_Scheduling {
 	    
 	   
 	    
-	    System.out.println("Processes | " + "Arrival Time | " + "Burst Time  " + "  |   Priority | " + "Turn Around Time | " + "Waiting Time");
+	    System.out.println("\n" + breaker + "\nProcesses | " + "Arrival Time | " + "Burst Time  " + "  |   Priority | " + "Turn Around Time | " + "Waiting Time");
 
         for (i = 0; i < n; i++) {
            
@@ -375,7 +420,7 @@ public class CPU_Scheduling {
             System.out.println("P" + (i+1) + "\t\t" + arrivalTime[i] + "\t\t" + tempBurstTime[i] +"\t\t" + priority[i] +  "\t\t" + turnAroundTime[i] + "\t\t" + waitingTime[i] );
         }
 	    
-	    System.out.println("Average Waiting Time: "+ (averageWaitingTime/n));
+	    System.out.println("\nAverage Waiting Time: "+ (averageWaitingTime/n));
 	    System.out.println("Average Turnaround time: "+ (averageTurnAroundTime/n));
 	    
 	        
@@ -383,30 +428,71 @@ public class CPU_Scheduling {
 	}
 	public static void main (String args[]){
 		while(true){
-			System.out.print("\n" + breaker + "\n Input number of processes[2-9]: ");
-			n = input.nextInt();
+			int caseFail1 = 0;
+					
+			//do while to catch exception from invalid input
+			do {
+				try {
+					System.out.print("\n" + breaker + "\n Input number of processes[2-9]: ");
+					n = input.nextInt();
+					caseFail1 = 1;
+					
+					if ( n == 1 || n > 9) {
+						System.out.println(" Invalid Input. Please enter the required number of Processes.");
+					}
+				} catch (Exception e) {
+					System.out.println(" Invalid Input. Please enter the required number of Processes.");
+					input.next();
+				}
+			} while (caseFail1 != 1 || n == 1 || n > 9);
 			
-			System.out.print("\nInput the Arrival Time:\n");
-		    for (int i=0;i<n;i++)
-		    {
-		    	processId[i]= i+1;
-		    	System.out.print(" AT" +(i+1)+": ");
-		    	arrivalTime[i]= input.nextInt();	
-		    	
-		    }
-		    System.out.print("\nInput the Burst Time:\n");
-		    for(int a = 0;a<n;a++){
-		    	System.out.print(" BT" +(a+1)+": ");
-		    	burstTime[a]= input.nextInt();
-		    	tempBurstTime[a]= burstTime[a];
-		    	flag[a]= 0;
-		    }
+			int caseFail3 = 0;
+			//do while to catch exception from invalid input
+			do {
+				try {
+					System.out.print("\nInput the Arrival Time:\n");
+				    for (int i=0;i<n;i++)
+				    {
+				    	processId[i]= i+1;
+				    	System.out.print(" AT" +(i+1)+": ");
+				    	arrivalTime[i]= input.nextInt();	
+				    	if (i+1 >= n) {
+				    		caseFail3 = 1;
+				    	}
+				    }
+				} catch (Exception e) {
+					System.out.println(" Invalid Input. Please enter integers only.");
+					input.next();
+				}
+			} while (caseFail3 != 1);
+			
+			int caseFail4 = 0;
+			//do while to catch exception from invalid input
+			do {
+				try {
+				    System.out.print("\nInput the Burst Time:\n");
+				    for(int a = 0;a<n;a++){
+				    	System.out.print(" BT" +(a+1)+": ");
+				    	burstTime[a]= input.nextInt();
+				    	tempBurstTime[a]= burstTime[a];
+				    	flag[a]= 0;
+				    	if (a+1 >= n) {
+				    		caseFail4 = 1;
+				    	}
+				    }
+				} catch (Exception e) {
+					System.out.println(" Invalid Input. Please enter integers only.");
+					input.next();
+				}
+			} while (caseFail4 != 1);
+			    
 
-		    int caseFail = 0;
+		    int caseFail2 = 0;
 		    
+		    //do while to catch exception from invalid input
 		    do {
 		    	
-			    System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit:");
+			    System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit");
 			    System.out.print("\nEnter choice: ");
 			    String choice = input.next();
 			    System.out.print("\n");
@@ -414,33 +500,34 @@ public class CPU_Scheduling {
 		    	switch(choice){
 			    case "A":
 			    case "a":
-			    	caseFail = 1;
+			    	caseFail2 = 1;
 			    	ShortestRemainingTimeFirst();
 			    	break;
 			    case "B":
 			    case "b":
-			    	caseFail = 1;
+			    	caseFail2 = 1;
 			    	RR();
 			    	break;
 			    case "C":
 			    case "c":
-			    	caseFail = 1;
+			    	caseFail2 = 1;
 			    	rro();
 			    	break;
 			    case "D":
 			    case "d":
-			    	caseFail = 1;
+			    	caseFail2 = 1;
 			    	pPrio();//Highest Number Highest Priority
 			    	break;
 			    case "F":
 			    case "f":
-			    	caseFail = 1;
+			    	caseFail2 = 1;
+			    	thankYou();
 			    	System.exit(0);
 			    	break;
 			    default:
 			    	System.out.println("Please enter only letters from A to F");
 			    }
-		    } while (caseFail != 1); 
+		    } while (caseFail2 != 1); 
 		    	
 		    	System.out.print("\nInput another set?[y/n]:");
 				 choice = input.next();
@@ -448,12 +535,12 @@ public class CPU_Scheduling {
 					zeroVariables();
 					continue;
 
-				}else{
-					System.out.println("\n\n"+ breaker2 +"\n*\t   Thank you for using our program.\t    *\n*\t   Made by:\t\t\t\t    *\n*\t      Marc Ricafort\t\t\t    *\n*\t      Mhargarette Basbas\t\t    *\n*\t      Stanley Orong\t\t\t    *\n*\t      Patricia Valenzuela\t\t    *\n*\t      Cyril Verdad\t\t\t    *\n" + breaker2 );
+				} else {
+					thankYou();
 					break;
 				}
 			
-		}  
+			}  
 		}
 }
 		
