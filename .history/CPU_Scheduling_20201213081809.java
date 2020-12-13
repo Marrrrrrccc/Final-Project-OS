@@ -398,6 +398,8 @@ public class CPU_Scheduling {
 	            count++;
 	            end=time+1;
 	            completionTime[smallest] = end;
+	            // waitingTime[smallest] = end - arrivalTime[smallest] - x[smallest];
+	            // turnAroundTime[smallest] = end - arrivalTime[smallest];
 	        }
 	    }
 	    for(i=0;i<n;i++)
