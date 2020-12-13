@@ -32,7 +32,7 @@ public class CPU_Scheduling {
 	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	static String breaker2 = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	
-	public static void zeroVariables(){
+	static void zeroVariables(){
 		n=99;
 		processId = new int[n];
 		 arrivalTime = new int[n]; //  arrival time
@@ -69,7 +69,7 @@ public class CPU_Scheduling {
 				+ "Cyril Verdad\t\t\t    *\n" + breaker2 );
 	}
 	
-	public static void ShortestRemainingTimeFirst()
+	static void ShortestRemainingTimeFirst()
 	{
 		int i;
 		int st=0, tot=0;
