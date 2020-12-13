@@ -63,7 +63,10 @@ public class CPU_Scheduling {
 	}
 	
 	static void thankYou() {
-		System.out.println("\n\n"+ breaker2 +"\n*\t   Thank you for using our program.\t    *\n*\t   Made by:\t\t\t\t    *\n*\t      Marc Ricafort\t\t\t    *\n*\t      Mhargarette Basbas\t\t    *\n*\t      Stanley Orong\t\t\t    *\n*\t      Patricia Valenzuela\t\t    *\n*\t      Cyril Verdad\t\t\t    *\n" + breaker2 );
+		System.out.println("\n\n"+ breaker2 +"\n*\t   Thank you for using our program.\t    *\n*\t   "
+				+ "Made by:\t\t\t\t    *\n*\t      Marc Ricafort\t\t\t    *\n*\t      Mhargarette Basbas\t\t    "
+				+ "*\n*\t      Stanley Orong\t\t\t    *\n*\t      Patricia Valenzuela\t\t    *\n*\t      "
+				+ "Cyril Verdad\t\t\t    *\n" + breaker2 );
 	}
 	
 	public static void ShortestRemainingTimeFirst()
@@ -403,7 +406,8 @@ public class CPU_Scheduling {
 	    
 	   
 	    
-	    System.out.println("\n" + breaker + "\nProcesses | " + "Arrival Time | " + "Burst Time  " + "  |   Priority | " + "Turn Around Time | " + "Waiting Time");
+	    System.out.println("\n" + breaker + "\nProcesses | " + "Arrival Time | " + "Burst Time  " + "  |   Priority "
+	    		+ "| " + "Turn Around Time | " + "Waiting Time");
 
         for (i = 0; i < n; i++) {
            
@@ -428,14 +432,14 @@ public class CPU_Scheduling {
 					n = input.nextInt();
 					caseFail1 = 1;
 					
-					if ( n == 1 || n > 9) {
+					if ( n < 2|| n > 9) {
 						System.out.println(" Invalid Input. Please enter the required number of Processes.");
 					}
 				} catch (Exception e) {
 					System.out.println(" Invalid Input. Please enter the required number of Processes.");
 					input.next();
 				}
-			} while (caseFail1 != 1 || n == 1 || n > 9);
+			} while (caseFail1 != 1 || n < 2 || n > 9);
 			
 			int caseFail3 = 0;
 			//do while to catch exception from invalid input
@@ -483,7 +487,11 @@ public class CPU_Scheduling {
 		    //do while to catch exception from invalid input
 		    do {
 		    	
-			    System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit");
+			    System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] "
+			    		+ "Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] "
+			    		+ "Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n"
+			    		+ "[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit");
+			    
 			    System.out.print("\nEnter choice: ");
 			    String choice = input.next();
 			    System.out.print("\n");
