@@ -1,5 +1,4 @@
 
-import java.io.IOException;
 import java.util.*;
  
 public class CPU_Scheduling {
@@ -32,6 +31,7 @@ public class CPU_Scheduling {
     static boolean[] done = new boolean[n];
 	static String breaker = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *";
 	static String breaker2 = "* * * * * * * * * * * * * * * * * * * * * * * * * * *";
+	
 	public static void zeroVariables(){
 		n=99;
 		processId = new int[n];
