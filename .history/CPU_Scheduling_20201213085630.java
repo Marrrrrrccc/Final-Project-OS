@@ -268,6 +268,7 @@ public class CPU_Scheduling {
 				input.next();
 			}	
 		} while (caseFail2 != 1);
+
 		q = new int[n]; 
 		for (int donePs = 0; donePs < n;) {    
 			if (notArrived!=9)

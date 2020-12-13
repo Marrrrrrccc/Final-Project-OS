@@ -268,6 +268,11 @@ public class CPU_Scheduling {
 				input.next();
 			}	
 		} while (caseFail2 != 1);
+		
+		// //copy values of burst time
+		// for (int i = 0; i < n; i++)  
+		// 	tempBurstTime[i] = burstTime[i];
+		//q try
 		q = new int[n]; 
 		for (int donePs = 0; donePs < n;) {    
 			if (notArrived!=9)
