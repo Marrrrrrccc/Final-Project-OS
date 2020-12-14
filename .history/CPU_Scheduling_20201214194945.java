@@ -92,30 +92,6 @@ public class CPU_Scheduling {
 	}
 
 	static void ShortestRemainingTimeFirst() {
-		System.out.print("Insert number of levels: ");
-		int levels = input.nextInt();
-		System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] \n[A] "
-				+ "Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] "
-				+ "Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E]First Come First Serve\n[F]Shortest Job First");
-		for (int i = 0; i < levels; i++) {
-			System.out.print("Input algorithm for level " + (i + 1) + ":");
-			String algo = input.next();
-			if (algo.equalsIgnoreCase("b")) {
-				System.out.print("Enter time quantum: ");
-				quantum = input.nextInt();
-			} else if (algo.equalsIgnoreCase("c")) {
-				System.out.print("Enter time quantum: ");
-				quantum = input.nextInt();
-				System.out.print("Enter Overhead: ");
-				overhead = input.nextInt();
-			} else if (algo.equalsIgnoreCase("d")) {
-
-				for (i = 0; i < n; i++) {
-					System.out.print(" Enter Priority " + (i + 1) + ": ");
-					priority[i] = input.nextInt();
-				}
-			}
-		}
 		int i;
 		int st = 0, tot = 0;
 
@@ -561,9 +537,9 @@ public class CPU_Scheduling {
 	static void mlfq() {
 		System.out.print("Insert number of levels: ");
 		int levels = input.nextInt();
-		System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] \n[A] "
+		System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] "
 				+ "Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] "
-				+ "Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E]First Come First Serve\n[F]Shortest Job First");
+				+ "Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n");
 		for (int i = 0; i < levels; i++) {
 			System.out.print("Input algorithm for level " + (i + 1) + ":");
 			String algo = input.next();
@@ -575,106 +551,103 @@ public class CPU_Scheduling {
 				quantum = input.nextInt();
 				System.out.print("Enter Overhead: ");
 				overhead = input.nextInt();
-			} else if (algo.equalsIgnoreCase("d")) {
-
-				for (i = 0; i < n; i++) {
-					System.out.print(" Enter Priority " + (i + 1) + ": ");
-					priority[i] = input.nextInt();
-				}
 			}
-		}
-
-		int i, j, k = 0, r = 0, time = 0, tq1 = 5, tq2 = 8, flag = 0;
-		char c;
-		char name;
-		for (i = 0, c = 'A'; i < n; i++, c++) {
-			q1arrivalTime[i] = arrivalTime[i];
-			q1name[i] = c;
-			q1remainingTime[i] = q1burstTime[i];/* save burst time in remaining time for each process */
-
-		}
-		sortByArrival();
-		time = q1arrivalTime[0];
-
-		for (i = 0; i < n; i++) {
-
-			if (q1remainingTime[i] <= tq1) {
-
-				time += q1remainingTime[i];/* from arrival time of first process to completion of this process */
-				q1remainingTime[i] = 0;
-				q1waitingTime[i] = time - q1arrivalTime[i]
-						- q1burstTime[i];/* amount of time process has been waiting in the first queue */
-				q1turnAroundTime[i] = time - q1arrivalTime[i];/* amount of time to execute the process */
-				System.out.println(q1name[i] + q1burstTime[i] + q1waitingTime[i] + q1turnAroundTime[i]);
-
-			} else/* process moves to queue 2 with qt=8 */
-			{
-				q2remainingTime[k] = time;
-				time += tq1;
-				q1remainingTime[i] -= tq1;
-				q2burstTime = q1remainingTime;
-				q2remainingTime[k] = q2burstTime[k];
-				q2name[k] = q1name[i];
-				k = k + 1;
-				flag = 1;
-			}
-		}
-		if (flag == 1) {
-
-		}
-		for (i = 0; i < k; i++) {
-			if (q2remainingTime[i] <= tq2) {
-				time += q2remainingTime[i];/* from arrival time of first process +BT of this process */
-				q2remainingTime[i] = 0;
-				q2waitingTime[i] = time - tq1
-						- q2burstTime[i];/* amount of time process has been waiting in the ready queue */
-				q2turnAroundTime[i] = time - q2arrivalTime[i];/* amount of time to execute the process */
-
-			} else/* process moves to queue 3 with FCFS */
-			{
-				q3arrivalTime[r] = time;
-				time += tq2;
-				q2remainingTime[i] -= tq2;
-				q3burstTime[r] = q2remainingTime[i];
-				q3remainingTime[r] = q3burstTime[r];
-				q3name[r] = q2name[r];
-				r = r + 1;
-				flag = 2;
-			}
-		}
-
-		{
-			if (flag == 2)
-
-				for (i = 0; i < r; i++) {
-					if (i == 0)
-						q3completionTime[i] = q3burstTime[i] + time - tq1 - tq2;
-					else
-						q3completionTime[i] = q3completionTime[i - 1] + q3burstTime[i];
-
-				}
-
-			for (i = 0; i < r; i++) {
-				q3turnAroundTime[i] = q3completionTime[i];
-				q3waitingTime[i] = q3turnAroundTime[i] - q3burstTime[i];
-
-			}
-
 		}
 	}
 
-	public static void main(String args[]) {
-		while (true) {
-			int caseFail1 = 0;
+	int i, j, k = 0, r = 0, time = 0, tq1 = 5, tq2 = 8, flag = 0;
+	char c;
+	char name;for(i=0,c='A';i<n;i++,c++)
+	{
+		q1arrivalTime[i] = arrivalTime[i];
+		q1name[i] = c;
+		q1remainingTime[i] = q1burstTime[i];/* save burst time in remaining time for each process */
 
-			// do while to catch exception from invalid input
+	}
+
+	sortByArrival();time=q1arrivalTime[0];
+
+	for(i=0;i<n;i++)
+
+	{
+
+		if (q1remainingTime[i] <= tq1) {
+
+			time += q1remainingTime[i];/* from arrival time of first process to completion of this process */
+			q1remainingTime[i] = 0;
+			q1waitingTime[i] = time - q1arrivalTime[i]
+					- q1burstTime[i];/* amount of time process has been waiting in the first queue */
+			q1turnAroundTime[i] = time - q1arrivalTime[i];/* amount of time to execute the process */
+			System.out.println(q1name[i] + q1burstTime[i] + q1waitingTime[i] + q1turnAroundTime[i]);
+
+		} else/* process moves to queue 2 with qt=8 */
+		{
+			q2remainingTime[k] = time;
+			time += tq1;
+			q1remainingTime[i] -= tq1;
+			q2burstTime = q1remainingTime;
+			q2remainingTime[k] = q2burstTime[k];
+			q2name[k] = q1name[i];
+			k = k + 1;
+			flag = 1;
+		}
+	}if(flag==1)
+	{
+
+	}for(i=0;i<k;i++)
+	{
+		if (q2remainingTime[i] <= tq2) {
+			time += q2remainingTime[i];/* from arrival time of first process +BT of this process */
+			q2remainingTime[i] = 0;
+			q2waitingTime[i] = time - tq1
+					- q2burstTime[i];/* amount of time process has been waiting in the ready queue */
+			q2turnAroundTime[i] = time - q2arrivalTime[i];/* amount of time to execute the process */
+
+		} else/* process moves to queue 3 with FCFS */
+		{
+			q3arrivalTime[r] = time;
+			time += tq2;
+			q2remainingTime[i] -= tq2;
+			q3burstTime[r] = q2remainingTime[i];
+			q3remainingTime[r] = q3burstTime[r];
+			q3name[r] = q2name[r];
+			r = r + 1;
+			flag = 2;
+		}
+	}
+
+	{
+		if (flag == 2)
+
+			for (i = 0; i < r; i++) {
+				if (i == 0)
+					q3completionTime[i] = q3burstTime[i] + time - tq1 - tq2;
+				else
+					q3completionTime[i] = q3completionTime[i - 1] + q3burstTime[i];
+
+			}
+
+		for (i = 0; i < r; i++) {
+			q3turnAroundTime[i] = q3completionTime[i];
+			q3waitingTime[i] = q3turnAroundTime[i] - q3burstTime[i];
+
+		}
+
+	}
+	}
+
+	public static void main (String args[]){
+		while(true){
+			int caseFail1 = 0;
+					
+			//do while to catch exception from invalid input
 			do {
 				try {
 					System.out.print("\n" + breaker + "\n Input number of processes[2-9]: ");
 					n = input.nextInt();
 					caseFail1 = 1;
-
-					if (n < 2 || n > 9) {
+					
+					if ( n < 2|| n > 9) {
 						System.out.println(" Invalid Input. Please enter the required number of Processes.");
 					}
 				} catch (Exception e) {
@@ -682,108 +655,105 @@ public class CPU_Scheduling {
 					input.next();
 				}
 			} while (caseFail1 != 1 || n < 2 || n > 9);
-
+			
 			int caseFail3 = 0;
-			// do while to catch exception from invalid input
+			//do while to catch exception from invalid input
 			do {
 				try {
 					System.out.print("\nInput the Arrival Time:\n");
-					for (int i = 0; i < n; i++) {
-						processId[i] = i + 1;
-						System.out.print(" AT" + (i + 1) + ": ");
-						arrivalTime[i] = input.nextInt();
-						if (i + 1 >= n) {
-							caseFail3 = 1;
-						}
-					}
+				    for (int i=0;i<n;i++)
+				    {
+				    	processId[i]= i+1;
+				    	System.out.print(" AT" +(i+1)+": ");
+				    	arrivalTime[i]= input.nextInt();	
+				    	if (i+1 >= n) {
+				    		caseFail3 = 1;
+				    	}
+				    }
 				} catch (Exception e) {
 					System.out.println(" Invalid Input. Please enter integers only.");
 					input.next();
 				}
 			} while (caseFail3 != 1);
-
+			
 			int caseFail4 = 0;
-			// do while to catch exception from invalid input
+			//do while to catch exception from invalid input
 			do {
 				try {
-					System.out.print("\nInput the Burst Time:\n");
-					for (int a = 0; a < n; a++) {
-						System.out.print(" BT" + (a + 1) + ": ");
-						burstTime[a] = input.nextInt();
-						tempBurstTime[a] = burstTime[a];
-						flag[a] = 0;
-						if (a + 1 >= n) {
-							caseFail4 = 1;
-						}
-					}
+				    System.out.print("\nInput the Burst Time:\n");
+				    for(int a = 0;a<n;a++){
+				    	System.out.print(" BT" +(a+1)+": ");
+				    	burstTime[a]= input.nextInt();
+				    	tempBurstTime[a]= burstTime[a];
+				    	flag[a]= 0;
+				    	if (a+1 >= n) {
+				    		caseFail4 = 1;
+				    	}
+				    }
 				} catch (Exception e) {
 					System.out.println(" Invalid Input. Please enter integers only.");
 					input.next();
 				}
 			} while (caseFail4 != 1);
+			    
 
-			int caseFail2 = 0;
+		    int caseFail2 = 0;
+		    
+		    //do while to catch exception from invalid input
+		    do {
+		    	
+			    System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] "
+			    		+ "Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] "
+			    		+ "Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n"
+			    		+ "[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit");
+			    
+			    System.out.print("\nEnter choice: ");
+			    String choice = input.next();
+			    System.out.print("\n");
+			
+		    	switch(choice){
+			    case "A":
+			    case "a":
+			    	caseFail2 = 1;
+			    	ShortestRemainingTimeFirst();
+			    	break;
+			    case "B":
+			    case "b":
+			    	caseFail2 = 1;
+			    	RR();
+			    	break;
+			    case "C":
+			    case "c":
+			    	caseFail2 = 1;
+			    	rro();
+			    	break;
+			    case "D":
+			    case "d":
+			    	caseFail2 = 1;
+			    	pPrio();//Highest Number Highest Priority
+			    	break;
+			    case "F":
+			    case "f":
+			    	caseFail2 = 1;
+			    	thankYou();
+			    	System.exit(0);
+			    	break;
+			    default:
+			    	System.out.println("Please enter only letters from A to F");
+			    }
+		    } while (caseFail2 != 1); 
+		    	
+		    	System.out.print("\nInput another set?[y/n]:");
+				 choice = input.next();
+				if(choice.equalsIgnoreCase("y")){
+					zeroVariables();
+					continue;
 
-			// do while to catch exception from invalid input
-			do {
-
-				System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] or exit [F]\n[A] "
-						+ "Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] "
-						+ "Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n"
-						+ "[E] Multi-level Feedback Queue (MLFQ)\n[F] Exit");
-
-				System.out.print("\nEnter choice: ");
-				String choice = input.next();
-				System.out.print("\n");
-
-				switch (choice) {
-					case "A":
-					case "a":
-						caseFail2 = 1;
-						ShortestRemainingTimeFirst();
-						break;
-					case "B":
-					case "b":
-						caseFail2 = 1;
-						RR();
-						break;
-					case "C":
-					case "c":
-						caseFail2 = 1;
-						rro();
-						break;
-					case "D":
-					case "d":
-						caseFail2 = 1;
-						pPrio();// Highest Number Highest Priority
-						break;
-					case "e":
-					case "E":
-						caseFail2 = 1;
-						ShortestRemainingTimeFirst();
-						break;
-					case "F":
-					case "f":
-						caseFail2 = 1;
-						thankYou();
-						System.exit(0);
-						break;
-					default:
-						System.out.println("Please enter only letters from A to F");
+				} else {
+					thankYou();
+					break;
 				}
-			} while (caseFail2 != 1);
-
-			System.out.print("\nInput another set?[y/n]:");
-			choice = input.next();
-			if (choice.equalsIgnoreCase("y")) {
-				zeroVariables();
-				continue;
-
-			} else {
-				thankYou();
-				break;
-			}
-
+			
+			}  
 		}
-	}
 }

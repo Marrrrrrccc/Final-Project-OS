@@ -92,32 +92,15 @@ public class CPU_Scheduling {
 	}
 
 	static void ShortestRemainingTimeFirst() {
-		System.out.print("Insert number of levels: ");
-		int levels = input.nextInt();
-		System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] \n[A] "
-				+ "Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] "
-				+ "Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E]First Come First Serve\n[F]Shortest Job First");
-		for (int i = 0; i < levels; i++) {
-			System.out.print("Input algorithm for level " + (i + 1) + ":");
-			String algo = input.next();
-			if (algo.equalsIgnoreCase("b")) {
-				System.out.print("Enter time quantum: ");
-				quantum = input.nextInt();
-			} else if (algo.equalsIgnoreCase("c")) {
-				System.out.print("Enter time quantum: ");
-				quantum = input.nextInt();
-				System.out.print("Enter Overhead: ");
-				overhead = input.nextInt();
-			} else if (algo.equalsIgnoreCase("d")) {
-
-				for (i = 0; i < n; i++) {
-					System.out.print(" Enter Priority " + (i + 1) + ": ");
-					priority[i] = input.nextInt();
-				}
-			}
-		}
 		int i;
 		int st = 0, tot = 0;
+		System.out.print("Insert number of levels: ");
+		int levels = input.nextInt();
+		System.out.println("Input algorithm for each levels ");
+		for (i = 0; i < levels; i++) {
+			System.out.print("Input algorithm for level " + (i + 1) + ":");
+			int algo = input.nextInt();
+		}
 
 		while (true) {
 			int min = 99, c = n;
@@ -162,6 +145,7 @@ public class CPU_Scheduling {
 		System.out.println("\nAverage Waiting Time: " + (averageWaitingTime / n));
 
 		System.out.println("Average Turnaround time: " + (averageTurnAroundTime / n));
+		
 
 	}
 
@@ -561,29 +545,11 @@ public class CPU_Scheduling {
 	static void mlfq() {
 		System.out.print("Insert number of levels: ");
 		int levels = input.nextInt();
-		System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] \n[A] "
-				+ "Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] "
-				+ "Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E]First Come First Serve\n[F]Shortest Job First");
+		System.out.println("Input algorithm for each levels ");
 		for (int i = 0; i < levels; i++) {
 			System.out.print("Input algorithm for level " + (i + 1) + ":");
-			String algo = input.next();
-			if (algo.equalsIgnoreCase("b")) {
-				System.out.print("Enter time quantum: ");
-				quantum = input.nextInt();
-			} else if (algo.equalsIgnoreCase("c")) {
-				System.out.print("Enter time quantum: ");
-				quantum = input.nextInt();
-				System.out.print("Enter Overhead: ");
-				overhead = input.nextInt();
-			} else if (algo.equalsIgnoreCase("d")) {
-
-				for (i = 0; i < n; i++) {
-					System.out.print(" Enter Priority " + (i + 1) + ": ");
-					priority[i] = input.nextInt();
-				}
-			}
+			int algo = input.nextInt();
 		}
-
 		int i, j, k = 0, r = 0, time = 0, tq1 = 5, tq2 = 8, flag = 0;
 		char c;
 		char name;
@@ -759,9 +725,7 @@ public class CPU_Scheduling {
 						break;
 					case "e":
 					case "E":
-						caseFail2 = 1;
-						ShortestRemainingTimeFirst();
-						break;
+						sjf();
 					case "F":
 					case "f":
 						caseFail2 = 1;

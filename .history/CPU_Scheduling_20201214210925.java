@@ -759,9 +759,7 @@ public class CPU_Scheduling {
 						break;
 					case "e":
 					case "E":
-						caseFail2 = 1;
 						ShortestRemainingTimeFirst();
-						break;
 					case "F":
 					case "f":
 						caseFail2 = 1;
