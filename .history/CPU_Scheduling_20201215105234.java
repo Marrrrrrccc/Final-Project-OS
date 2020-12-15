@@ -92,6 +92,30 @@ public class CPU_Scheduling {
 	}
 
 	static void ShortestRemainingTimeFirst() {
+		System.out.print("Insert number of levels: ");
+		int levels = input.nextInt();
+		System.out.println("\n" + breaker + "\nChoose An Algorithm [A-E] \n[A] "
+				+ "Shortest Remaining Time First (SRTF)\n[B] Round Robin (RR)\n[C] "
+				+ "Round Robin with Overhead (RRO)\n[D] Preemptive Priority (P-Prio)\n[E]First Come First Serve\n[F]Shortest Job First");
+		for (int i = 0; i < levels; i++) {
+			System.out.print("Input algorithm for level " + (i + 1) + ":");
+			String algo = input.next();
+			if (algo.equalsIgnoreCase("b")) {
+				System.out.print("Enter time quantum: ");
+				quantum = input.nextInt();
+			} else if (algo.equalsIgnoreCase("c")) {
+				System.out.print("Enter time quantum: ");
+				quantum = input.nextInt();
+				System.out.print("Enter Overhead: ");
+				overhead = input.nextInt();
+			} else if (algo.equalsIgnoreCase("d")) {
+
+				for (i = 0; i < n; i++) {
+					System.out.print(" Enter Priority " + (i + 1) + ": ");
+					priority[i] = input.nextInt();
+				}
+			}
+		}
 		int i;
 		int st = 0, tot = 0;
 

@@ -92,6 +92,7 @@ public class CPU_Scheduling {
 	}
 
 	static void ShortestRemainingTimeFirst() {
+	
 		int i;
 		int st = 0, tot = 0;
 
